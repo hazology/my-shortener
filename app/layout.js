@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "외솔.한국 - 울산교육청 URL 줄이기",
   description: "울산교육청 URL 단축 서비스",
+    icons: {
+    icon: "/favicon.ico", // public 폴더 기준
+    },
 };
 
 export default function RootLayout({ children }) {
