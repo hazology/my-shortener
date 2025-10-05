@@ -80,7 +80,7 @@ export default function DashboardPage() {
                 <td style={{
                   padding: 8, border: "1px solid #dfe6e9", textAlign: "center"
                 }}>
-                  <QRCode value={`${window.location.origin}/${u.code}`} size={64} />
+                  <QRCodeCanvas value={`${window.location.origin}/${u.code}`} size={512} />
                 </td>
                 <td style={{
                   padding: 8, border: "1px solid #dfe6e9", textAlign: "center"
