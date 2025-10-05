@@ -4,17 +4,20 @@ import { supabaseAdmin } from "../../lib/supabaseAdmin";
 export async function GET(_req, { params }) {
   const code = params.code;
 
-  const { data: row } = await supabaseAdmin
+  const { data, error } = await supabaseAdmin
     .from("urls")
     .select("url, expires_at")
     .eq("code", code)
-    .maybeSingle();
+    .single();
 
-  if (!row) return new NextResponse("Not found", { status: 404 });
-
-  if (row.expires_at && new Date(row.expires_at).getTime() < Date.now()) {
-    return new NextResponse("This link has expired.", { status: 410 });
+  if (error || !data) {
+    return NextResponse.json({ error: "URL not found" }, { status: 404 });
   }
 
-  return NextResponse.redirect(row.url);
+  // 만료 확인
+  if (data.expires_at && new Date(data.expires_at) < new Date()) {
+    return NextResponse.json({ error: "URL expired" }, { status: 410 });
+  }
+
+  return NextResponse.redirect(data.url);
 }
