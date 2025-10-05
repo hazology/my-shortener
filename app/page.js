@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabaseClient";
+import { toUnicode } from "punycode";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -41,7 +42,12 @@ export default function Home() {
 
     const data = await res.json();
     if (data.error) {
-      alert(data.error);
+      // 에러 메시지 커스터마이즈
+      if (data.error.includes("duplicate key")) {
+        alert("이미 사용 중인 주소입니다. 다른 코드를 입력하세요.");
+      } else {
+        alert(data.error);
+      }
     } else {
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
       setShortUrl(`${siteUrl}/${data.code}`);
@@ -51,9 +57,21 @@ export default function Home() {
   // URL 복사하기
   async function copyToClipboard() {
     if (!shortUrl) return;
-    await navigator.clipboard.writeText(shortUrl);
+    const unicodeUrl = shortUrl.replace(
+      /^https?:\/\/([^/]+)/,
+      (m, domain) => `https://${toUnicode(domain)}`
+    );
+    await navigator.clipboard.writeText(unicodeUrl);
     alert("단축 URL이 클립보드에 복사되었습니다!");
   }
+
+  // punycode → 한글 도메인으로 변환된 URL
+  const unicodeShortUrl = shortUrl
+    ? shortUrl.replace(
+        /^https?:\/\/([^/]+)/,
+        (m, domain) => `https://${toUnicode(domain)}`
+      )
+    : "";
 
   return (
     <div
@@ -79,7 +97,6 @@ export default function Home() {
         <h1 style={{ marginBottom: 12 }}> 외솔.한국</h1>
         <h2 style={{ marginBottom: 12 }}> 울산교육청 URL 줄이기 서비스</h2>
 
-
         {/* 로그인 상태 표시 */}
         <div style={{ marginBottom: 20 }}>
           {user ? (
@@ -103,7 +120,7 @@ export default function Home() {
                     cursor: "pointer",
                     fontWeight: "bold",
                     fontSize: "0.9rem",
-                    transition: "background 0.2s ease"
+                    transition: "background 0.2s ease",
                   }}
                   onMouseOver={(e) => (e.target.style.background = "#2d3436")}
                   onMouseOut={(e) => (e.target.style.background = "#636e72")}
@@ -121,7 +138,7 @@ export default function Home() {
                     fontWeight: "bold",
                     fontSize: "0.9rem",
                     display: "inline-block",
-                    transition: "background 0.2s ease"
+                    transition: "background 0.2s ease",
                   }}
                   onMouseOver={(e) => (e.target.style.background = "#0652DD")}
                   onMouseOut={(e) => (e.target.style.background = "#0984e3")}
@@ -134,7 +151,6 @@ export default function Home() {
             <a href="/login">로그인</a>
           )}
         </div>
-
 
         {/* 입력 폼 */}
         <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
@@ -197,7 +213,7 @@ export default function Home() {
         </form>
 
         {/* 결과 표시 */}
-        {shortUrl && (
+        {unicodeShortUrl && (
           <div
             style={{
               background: "#f1f2f6",
@@ -207,7 +223,7 @@ export default function Home() {
           >
             <p style={{ margin: 0, fontWeight: "bold" }}>Shortened URL</p>
             <a
-              href={shortUrl}
+              href={unicodeShortUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -216,10 +232,10 @@ export default function Home() {
                 fontWeight: "bold",
               }}
             >
-              {shortUrl}
+              {unicodeShortUrl}
             </a>
             <div style={{ marginTop: 12 }}>
-              <QRCodeCanvas value={shortUrl} size={512} />
+              <QRCodeCanvas value={unicodeShortUrl} size={512} />
             </div>
             <button
               onClick={copyToClipboard}
