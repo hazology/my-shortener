@@ -1,22 +1,30 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "../../../lib/supabaseAdmin";
+import { supabase } from "../../../lib/supabaseClient";
 
 export async function GET(req) {
-  const { searchParams } = new URL(req.url);
-  const userId = searchParams.get("userId");
-
-  if (!userId) {
-    return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
+  // ✅ Authorization 헤더에서 토큰 꺼내기
+  const authHeader = req.headers.get("authorization");
+  if (!authHeader) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data, error } = await supabaseAdmin
+  const token = authHeader.split(" ")[1];
+  const { data: { user }, error } = await supabase.auth.getUser(token);
+
+  if (error || !user) {
+    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  }
+
+  // ✅ 로그인한 사용자의 URL만 가져오기
+  const { data, error: dbError } = await supabaseAdmin
     .from("urls")
-    .select("id, code, url, expires_at, created_at")
-    .eq("user_id", userId)
+    .select("*")
+    .eq("user_id", user.id)  // 여기서 user_id로 필터링
     .order("created_at", { ascending: false });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: dbError.message }, { status: 400 });
   }
 
   return NextResponse.json({ urls: data });
