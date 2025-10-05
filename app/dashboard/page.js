@@ -43,6 +43,26 @@ export default function DashboardPage() {
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)", width: "95%", maxWidth: 900
       }}>
         <h1 style={{ marginBottom: "1rem" }}>📊 내 URL 대시보드</h1>
+        <a
+          href="/"
+          style={{
+            padding: "10px 18px",
+            background: "#636e72",
+            color: "#fff",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: "bold",
+            fontSize: "0.9rem",
+            display: "inline-block",
+            transition: "background 0.2s ease",
+            marginBottom: "16px"
+          }}
+          onMouseOver={(e) => (e.target.style.background = "#2d3436")}
+          onMouseOut={(e) => (e.target.style.background = "#636e72")}
+        >
+          🏠 메인으로
+        </a>
+
         {user && <p>안녕하세요, {user.email}</p>}
         <table style={{
           width: "100%", borderCollapse: "collapse", marginTop: 16

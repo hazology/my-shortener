@@ -16,8 +16,8 @@ export default function LoginPage() {
       if (error) {
         setMessage({ type: "error", text: error.message });
       } else {
-        setMessage({ type: "success", text: "로그인 성공! 대시보드로 이동합니다." });
-        setTimeout(() => (window.location.href = "/dashboard"), 1000);
+        setMessage({ type: "success", text: "로그인 성공!" });
+        setTimeout(() => (window.location.href = "/"), 1000);
       }
     } else {
       const { error } = await supabase.auth.signUp({ email, password });

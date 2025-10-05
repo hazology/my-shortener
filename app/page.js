@@ -235,7 +235,7 @@ export default function Home() {
               {unicodeShortUrl}
             </a>
             <div style={{ marginTop: 12 }}>
-              <QRCodeCanvas value={unicodeShortUrl} size={512} />
+              <QRCodeCanvas value={unicodeShortUrl} size={256} />
             </div>
             <button
               onClick={copyToClipboard}
