@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
-import { QRCode } from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import { FaTrashAlt, FaQrcode, FaExternalLinkAlt } from "react-icons/fa";
 
 export default function DashboardPage() {

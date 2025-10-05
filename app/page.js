@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { QRCode } from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabaseClient";
 
 export default function Home() {
