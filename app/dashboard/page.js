@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { QRCodeCanvas } from "qrcode.react";
 import { FaTrashAlt, FaQrcode, FaExternalLinkAlt } from "react-icons/fa";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const [urls, setUrls] = useState([]);
