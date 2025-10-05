@@ -4,35 +4,31 @@ import { supabaseAdmin } from "./lib/supabaseAdmin";
 export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
-  // API나 정적 파일은 무시
+  // API, 정적 리소스 제외
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon.ico")
+    pathname.startsWith("/static") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/"
   ) {
     return NextResponse.next();
   }
 
-  // 코드 추출 (ex: /ulsan5)
-  const code = pathname.slice(1);
-  if (!code) return NextResponse.next();
-
-  // Supabase에서 URL 찾기
-  const { data, error } = await supabaseAdmin
+  const code = pathname.slice(1); // /ulsan5 → ulsan5
+  const { data } = await supabaseAdmin
     .from("urls")
-    .select("original_url, expiry")
+    .select("url, expires_at")
     .eq("code", code)
     .single();
 
-  if (!data || error) {
-    return NextResponse.next(); // 못 찾으면 그냥 404
+  if (data && (!data.expires_at || new Date(data.expires_at) > new Date())) {
+    return NextResponse.redirect(data.url);
   }
 
-  // 만료 확인
-  if (data.expiry && new Date(data.expiry) < new Date()) {
-    return NextResponse.next();
-  }
-
-  // 원래 URL로 리다이렉트
-  return NextResponse.redirect(data.original_url);
+  return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/((?!api|_next|static|favicon.ico).*)"],
+};
