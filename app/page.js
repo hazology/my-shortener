@@ -192,10 +192,18 @@ export default function Home() {
               borderRadius: 8,
             }}
           >
-            <option value="1d">24시간</option>
+            {/* 공통 옵션 */}
             <option value="7d">1주</option>
             <option value="30d">1달</option>
-            {user && <option value="forever">무제한</option>}
+
+            {/* 로그인 한 경우만 더 많은 옵션 표시 */}
+            {user && (
+              <>
+                <option value="180d">6달</option>
+                <option value="365d">1년</option>
+                <option value="forever">무제한</option>
+              </>
+            )}
           </select>
           <button
             type="submit"
