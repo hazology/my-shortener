@@ -69,15 +69,17 @@ export default function Home() {
       const originString = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
       const originUrl = new URL(originString);
       
-      // !! FIX: 'xn--'로 시작하는 코드(한글)만 toUnicode로 변환 (RangeError 방지)
+      // !! FIX:
+      // 'xn--'로 시작하는 코드(한글 경로)만 toUnicode로 변환 (RangeError 방지)
       let unicodePath = shortCode;
-      if (shortCode.startsWith("xn--")) {
+      if (shortCode && shortCode.startsWith("xn--")) {
         unicodePath = toUnicode(shortCode);
       }
       
-      // !! FIX: 'xn--'로 시작하는 도메인(한글)만 toUnicode로 변환
+      // !! FIX:
+      // 'xn--'로 시작하는 도메인(한글 도메인)만 toUnicode로 변환 (RangeError 방지)
       let unicodeDomain = originUrl.hostname;
-      if (originUrl.hostname.startsWith("xn--")) {
+      if (originUrl.hostname && originUrl.hostname.startsWith("xn--")) {
          unicodeDomain = toUnicode(originUrl.hostname);
       }
       
@@ -338,7 +340,7 @@ export default function Home() {
             외솔.한국, 그 이상의 가치
           </h2>
           <p style={{ fontSize: "1.1rem", color: "#555", marginBottom: "2.5rem" }}>
-            {/* ESLint 오류 수정 */}
+            {/* !! CHANGED: ESLint 오류 수정 */}
             울산교육청의 똑똑한 AI 친구, &apos;우리아이&apos;를 만나보세요!
           </p>
 
@@ -402,7 +404,7 @@ export default function Home() {
               </div>
               <h3 style={{ fontWeight: "bold", fontSize: "1.2rem", marginBottom: "0.5rem", color: "#333" }}>교사를 위한 강력한 도구</h3>
               <p style={{ color: "#444", lineHeight: 1.6 }}>
-                {/* ESLint 오류 수정 */}
+                {/* !! CHANGED: ESLint 오류 수정 */}
                 수업 자료 제작이 고민이라면? 울산 교육 가족에게 무료 제공되는 &apos;미리캔버스 Pro&apos;로 손쉽게 디자인을 완성하세요.
               </p>
             </div>
