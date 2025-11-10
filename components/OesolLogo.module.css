@@ -1,20 +1,28 @@
-/* 파일 경로: components/OesolLogo.module.css */
+/* 파일 경로: components/OesolLogo.module.css (이 코드로 덮어쓰세요) */
 
 .logo {
-  /* PC (image_fcf696.jpg) 기준 스타일 */
   width: 100%;
-  max-width: 200px; /* PC에서는 200px */
+  max-width: 200px;
   height: auto;
-  margin-bottom: 24px;
+  
+  /* 1. (!! 수정 !!) 
+     margin-bottom 값을 16px에서 0으로 변경합니다.
+     (정렬은 부모인 .sidebar가 담당합니다.)
+  */
+  margin-bottom: 0;
 }
 
-/* 모바일 (image_4e66e9.png) 기준 스타일 */
+/* 모바일 반응형 */
 @media (max-width: 768px) {
   .logo {
-    max-width: 240px; /* 1. 요청하신 240px로 수정 */
-    margin-bottom: 16px;
+    max-width: 240px; 
     
-    /* 2. 모바일에서는 로고가 중앙에 오도록 (디자인 참고) */
+    /* 2. (!! 수정 !!)
+       모바일에선 .sidebar의 flex가 해제되므로
+       카드와의 간격을 16px로 다시 설정합니다.
+    */
+    margin-bottom: 16px; 
+    
     margin-left: auto;
     margin-right: auto;
   }

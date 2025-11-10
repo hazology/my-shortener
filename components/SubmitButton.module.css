@@ -17,6 +17,9 @@
   justify-content: center;
   align-items: center;
   
+  /* 1. (!! 수정 !!) 
+     캐릭터가 다시 보이도록 'hidden'에서 'visible'로 되돌립니다.
+  */
   overflow: visible; 
   
   transition: opacity 0.2s ease;
@@ -36,15 +39,16 @@
   z-index: 1;
   pointer-events: none; 
   
-  width: 600px; 
+  width: 480px; /* (20% 줄인 값 유지) */
   height: auto;
   
   right: 40px;
   
-  /* 1. (!! 핵심 수정 !!) 
-     bottom 값을 -100px에서 -10px로 변경하여 90px 위로 올립니다.
+  /* 2. (!! 수정 !!) 
+     'bottom' 값을 '10px'로 설정합니다.
+     (버튼 하단보다 10px 위에 캐릭터 하단이 위치합니다.)
   */
-  bottom: -10px; 
+  bottom: 10px; 
 }
 
 /* 모바일 반응형 */
@@ -55,12 +59,10 @@
   }
   
   .character {
-    width: 400px; 
+    width: 320px; 
     right: 10px;
     
-    /* 2. (!! 수정 !!) 
-       모바일에서도 90px 올리려면 -60px에서 30px로 변경합니다.
-    */
-    bottom: 30px; 
+    /* 3. (!! 수정 !!) 모바일 'bottom'도 '20px'로 설정합니다. */
+    bottom: 20px; 
   }
 }

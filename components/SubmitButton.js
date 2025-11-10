@@ -1,4 +1,4 @@
-/* 파일 경로: components/SubmitButton.js */
+/* 파일 경로: components/SubmitButton.js (이 코드로 덮어쓰세요) */
 import Image from 'next/image';
 import styles from './SubmitButton.module.css';
 
@@ -8,13 +8,15 @@ export default function SubmitButton() {
       <span className={styles.text}>URL 줄이기</span>
       
       <Image
-        /* 1. (!! 수정 !!) 
-           src="/images/character-wooli.png" -> src="/images/charac-intro01.svg"
-        */
         src="/images/character-wooli.svg"
         alt="울리 캐릭터"
-        width={300}  // (SVG 원본 크기에 맞게 조절하셔도 됩니다)
-        height={300} // (CSS가 실제 크기를 제어합니다)
+        
+        /* 1. (!! 수정 !!) 
+           width/height를 300에서 240으로 20% 줄입니다.
+        */
+        width={240}  
+        height={240} 
+        
         className={styles.character}
         priority
       />

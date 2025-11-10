@@ -2,15 +2,14 @@
 
 .footer {
   width: 100%;
-  padding: 40px 20px;
   
-  /* 1. (!! 수정 !!) 배경색을 투명하게 변경 */
+  /* 1. (!! 수정 !!) 
+     상하 패딩을 40px에서 20px로 줄입니다.
+  */
+  padding: 20px 20px;
+  
   background-color: transparent; 
-  
   text-align: center;
-  
-  /* 2. (!! 삭제 !!) 상단 경계선 제거 */
-  /* border-top: 1px solid #EAEAEA; */
 }
 
 .wrapper {
@@ -54,7 +53,8 @@
 /* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
   .footer {
-    padding: 30px 20px;
+    /* 2. (!! 수정 !!) 모바일 상하 패딩도 30px에서 24px로 줄입니다. */
+    padding: 24px 20px;
   }
   .links {
     gap: 10px;

@@ -2,18 +2,18 @@
 
 .header {
   width: 100%;
-  
-  /* 1. (!! 수정 !!) 배경색을 투명하게 변경 */
   background-color: transparent; 
-  
-  /* 2. (!! 삭제 !!) 하단 경계선 제거 */
-  /* border-bottom: 1px solid #EAEAEA; */
 }
 
 .wrapper {
   max-width: var(--layout-max-width, 1728px);
   margin: 0 auto;
-  padding: 40px; 
+  
+  /* 1. (!! 수정 !!) 
+     상하/좌우 패딩을 40px에서 20px로 줄입니다.
+  */
+  padding: 20px; 
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,7 +43,8 @@
 /* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
   .wrapper {
-    padding: 20px; 
+    /* 2. (!! 수정 !!) 모바일 패딩도 20px에서 16px로 줄입니다. */
+    padding: 16px; 
   }
   .logo {
     height: 32px; 

@@ -9,13 +9,10 @@ export default function InfoSidebar() {
   return (
     <aside className={styles.sidebar}>
       
-      {/* 1. '외솔한국' 로고 */}
       <OesolLogo />
 
-      {/* 2. '외솔 최현배' 하얀 박스 카드 */}
       <div className={styles.card}>
         
-        {/* 3. 텍스트 콘텐츠 (z-index: 2) */}
         <div className={styles.content}>
           <div className={styles.cardHeader}>
             <span className={styles.cardTitle}>외솔이란?</span>
@@ -28,13 +25,15 @@ export default function InfoSidebar() {
           <p className={styles.personQuote}>말과 글은 우리의 얼이다.</p>
         </div>
         
-        {/* 4. 이미지 컨테이너 (z-index: 1) */}
         <div className={styles.imageContainer}>
           <Image
             src="/images/person-choi.png"
             alt="외솔 최현배"
-            width={466}  /* 컨테이너 크기와 동일하게 (CSS가 제어함) */
-            height={320} /* 컨테이너 크기와 동일하게 (CSS가 제어함) */
+            
+            /* (!! 수정 !!) CSS 컨테이너 크기(360x360)와 일치시킴 */
+            width={360}  
+            height={360} 
+            
             className={styles.personImage}
           />
         </div>

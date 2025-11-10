@@ -1,14 +1,13 @@
-// 파일 경로: app/page.js (이 코드로 덮어쓰세요)
+/* 파일 경로: app/page.js (오류 수정을 위해 원래 코드로 복원) */
 "use client";
 
 import { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabaseClient";
 import { toUnicode, toASCII } from "punycode";
-// import { FaArrowDown } from "react-icons/fa"; // 1. (!! 삭제 !!) FaArrowDown 삭제
-import Image from 'next/image'; // Image 컴포넌트 임포트
+import Image from 'next/image'; 
 
-// --- 새 컴포넌트 임포트 ---
+// --- 올바른 컴포넌트 임포트 ---
 import styles from "./page.module.css";
 import InfoSidebar from "../components/InfoSidebar";
 import StyledInput from "../components/StyledInput";
@@ -24,13 +23,14 @@ const qrImageSettings = {
 };
 
 export default function Home() {
-  // (State 및 함수 로직은 이전과 동일하므로 생략)
   const [url, setUrl] = useState("");
   const [customCode, setCustomCode] = useState("");
   const [expiry, setExpiry] = useState("7d");
   const [shortCode, setShortCode] = useState(""); 
   const [user, setUser] = useState(null);
   useEffect(() => { supabase.auth.getUser().then(({ data }) => { setUser(data.user ?? null); }); }, []);
+  
+  // (함수는 생략)
   async function handleSubmit(e) { /* ... */ }
   let functionalShortUrl = ""; let displayShortUrl = ""; if (shortCode) { /* ... */ }
   async function copyToClipboard() { /* ... */ }
@@ -53,10 +53,9 @@ export default function Home() {
             required
           />
 
-          {/* 2. (!! 수정 !!) SVG 화살표 아이콘 추가 */}
           <div className={styles.arrowWrapper}>
             <Image
-              src="/icons/arrow-down.svg" // public/icons/arrow-down.svg
+              src="/icons/arrow-down.svg" 
               alt="아래 화살표"
               width={24} 
               height={24}
@@ -92,6 +91,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 이 SubmitButton이 울리 캐릭터를 포함하고 있습니다 */}
           <SubmitButton />
         </form>
 

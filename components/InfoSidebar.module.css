@@ -2,37 +2,44 @@
 
 .sidebar {
   width: 100%;
-  max-width: 400px;
+  /* 320px * 0.9 = 288px */
+  max-width: 288px;
+  /* 716px * 0.9 = 644px */
+  height: 644px; 
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
 }
 
 .card {
-  width: 320px;
-  height: 449px; 
+  /* 320px * 0.9 = 288px */
+  width: 288px;
+  /* 449px * 0.9 = 404px */
+  height: 404px; 
   background-color: #FFFFFF;
   border-radius: 12px;
   position: relative; 
   overflow: hidden; 
 }
 
+/* (내부 패딩 등은 폰트 크기 비례 유지) */
 .content {
   padding: 32px;
   position: relative; 
-  z-index: 2; /* 이미지(z-index: 1)보다 항상 위에 표시 */
+  z-index: 2; 
 }
-
 .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
-
 .cardTitle {
   font-size: 16px;
   font-weight: 600;
   opacity: 0.5;
 }
-
 .cardMoreLink {
   font-size: 14px;
   color: var(--color-text-secondary);
@@ -42,14 +49,12 @@
 .cardMoreLink:hover {
   text-decoration: underline;
 }
-
 .personName {
   font-size: 28px;
   font-weight: 700;
   color: var(--color-text-primary);
   margin-bottom: 8px;
 }
-
 .personQuote {
   font-size: 18px; 
   color: var(--color-text-secondary);
@@ -59,31 +64,31 @@
 
 .imageContainer {
   position: absolute;
-  z-index: 1; /* 텍스트(.content)보다 뒤 */
-  width: 466px;
-  height: 320px;
-  top: 140px; /* 이미지를 텍스트 아래로 내림 */
-
-  /* 1. (!! 핵심 수정 !!) 
-     left: -120px; -> left: -90px;
-     이미지를 오른쪽으로 30px 이동시킵니다.
-  */
-  left: -90px; 
+  z-index: 1; 
+  /* 400px * 0.9 = 360px */
+  width: 360px;
+  /* 400px * 0.9 = 360px */
+  height: 360px;
+  /* 140px * 0.9 = 126px */
+  top: 126px; 
+  /* -80px * 0.9 = -72px */
+  left: -72px; 
 }
 
 .personImage {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 'fill' 효과 */
+  object-fit: contain; 
 }
 
-/* --- 모바일 반응형 --- */
+/* --- 모바일 반응형 (모바일은 90% 축소 제외) --- */
 @media (max-width: 768px) {
   .sidebar {
     width: 320px; 
     max-width: 100%;
+    height: auto; 
+    display: block; 
   }
-
   .card {
     width: 320px;
     height: 449px; 
@@ -91,16 +96,19 @@
     padding: 0; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   }
-  
   .content {
-    padding: 24px; /* 모바일용 패딩 */
+    padding: 24px; 
   }
-
   .personName {
     font-size: 24px;
   }
-  
   .personQuote {
     font-size: 16px;
+  }
+  .imageContainer {
+    width: 400px;
+    height: 400px;
+    left: -80px; 
+    top: 140px; /* (모바일에서는 원본 값 유지) */
   }
 }

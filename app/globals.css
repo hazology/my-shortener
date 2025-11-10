@@ -5,18 +5,23 @@
 
 /* 2. CSS 변수 (디자인 토큰) */
 :root {
-  /* PC 버전 최대 넓이 */
-  --layout-max-width: 1728px;
+  /* PC 버전 최대 넓이 (1728px * 0.9 = 1555px) */
+  --layout-max-width: 1555px; 
 
-  /* 그라디언트 색상 */
+  /* (이하 색상 변수 동일) */
   --color-bg-gradient-start: #FFF4D7; 
   --color-bg-gradient-end: #FFE397; 
-
-  /* 기타 색상 (피그마에서 정확한 값으로 수정하세요) */
   --color-text-primary: #333333;
   --color-text-secondary: #767676;
   --color-brand-yellow: #F9C80E;
   --color-border-light: #EAEAEA;
+}
+
+html {
+  /* 3. (!! 핵심 수정 !!) 
+     전체 폰트 및 rem 단위를 90%로 스케일 다운합니다. 
+  */
+  font-size: 90%;
 }
 
 html,
@@ -29,15 +34,13 @@ body {
 body {
   color: var(--color-text-primary);
   
-  /* 3. 기본 배경: 그라디언트만 적용 */
+  /* (이하 동일) */
   background: linear-gradient(to bottom right, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
   background-repeat: no-repeat;
-  background-attachment: fixed; /* 스크롤해도 그라디언트 고정 */
+  background-attachment: fixed; 
 
-  /* 4. 폰트 적용 */
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   
-  /* 5. 블렌드 모드를 위한 스태킹 컨텍스트 생성 */
   position: relative;
   isolation: isolate;
   
@@ -45,29 +48,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 6. 패턴 오버레이 (::before 가상 요소 사용) */
 body::before {
   content: '';
-  position: fixed; /* 화면 전체에 고정 */
-  inset: 0; /* top: 0; left: 0; right: 0; bottom: 0; */
-  
-  /* 'public/images/character.png' 경로 가정 */
+  position: fixed; 
+  inset: 0; 
   background-image: url('/images/character.png');
   background-repeat: repeat;
-  
-  /* 7. 블렌드 모드 및 투명도 적용 */
   mix-blend-mode: overlay; 
-  opacity: 0.1; /* 20% */
-  
-  /* 8. 컨텐츠 뒤로 보내기 */
+  opacity: 0.1; 
   z-index: -1; 
-  
-  /* 9. 클릭 방해 방지 */
   pointer-events: none;
 }
 
-
-/* 10. 기본 스타일 리셋 */
 * {
   box-sizing: border-box;
   padding: 0;
