@@ -5,15 +5,16 @@ import styles from './SubmitButton.module.css';
 export default function SubmitButton() {
   return (
     <button type="submit" className={styles.button}>
-      {/* 1. 텍스트 */}
       <span className={styles.text}>URL 줄이기</span>
       
-      {/* 2. 울리 캐릭터 이미지 */}
       <Image
-        src="/images/character-wooli.png" // (public/images/에 저장했다고 가정)
+        /* 1. (!! 수정 !!) 
+           src="/images/character-wooli.png" -> src="/images/charac-intro01.svg"
+        */
+        src="/images/charac-intro01.svg" 
         alt="울리 캐릭터"
-        width={300} // (CSS에서 제어하므로 원본 비율)
-        height={300} // (CSS에서 제어하므로 원본 비율)
+        width={300}  // (SVG 원본 크기에 맞게 조절하셔도 됩니다)
+        height={300} // (CSS가 실제 크기를 제어합니다)
         className={styles.character}
         priority
       />
