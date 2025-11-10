@@ -59,3 +59,13 @@
   font-weight: 400;
   font-size: 18px;
 }
+
+/* --- 모바일 반응형 (이 부분이 추가되었습니다) --- */
+@media (max-width: 768px) {
+  .container {
+    /* 모바일에선 하단 간격을 84px에서 0으로 줄입니다.
+       (간격은 app/page.module.css의 .arrowWrapper가 담당)
+    */
+    margin-bottom: 0px; 
+  }
+}

@@ -19,10 +19,6 @@
   border-radius: 40px;
   padding: 36px; 
   position: relative; 
-  /* 1. (!! 수정 !!) 
-     메인 박스 자체에 overflow: hidden을 설정해, 
-     캐릭터가 이 박스 밖으로 나가는 것을 방지합니다.
-  */
   overflow: hidden;
 }
 
@@ -52,11 +48,6 @@
   align-items: flex-end; 
   gap: 20px;
   
-  /* 2. (!! 수정 !!) 
-     버튼이 너무 아래로 밀리는 것을 막기 위해 
-     margin-bottom 값을 218px에서 60px로 대폭 줄입니다.
-     (이 값은 디자인을 보며 60px~100px 사이로 미세 조정이 필요할 수 있습니다.)
-  */
   margin-bottom: 170px; 
 }
 
@@ -88,16 +79,32 @@
     height: auto; 
     min-height: auto;
     padding: 20px;
-    overflow: visible; /* 모바일에선 다시 보이도록 */
+    overflow: visible; 
   }
   
   .selectWrapper {
     flex-direction: column; 
-    align-items: flex-start;
-    gap: 24px;
-    margin-bottom: 30px; /* 모바일에선 30px 유지 */
+    align-items: flex-start; /* (정렬 기준) */
+    gap: 20px; /* (간격 통일) */
+    
+    /* (!! 수정 !!) 버튼 겹침을 피하기 위해 간격 확보 */
+    margin-bottom: 60px; 
+    
+    /* (!! 핵심 !!) 부모 너비를 100%로 설정 */
+    width: 100%; 
   }
   
+  /* (!! 수정 !!) 
+     .selectWrapper의 모든 자식 요소(단축 주소, 유지 기간)의
+     너비를 100%로 강제합니다.
+  */
+  .selectWrapper > * {
+    width: 100%;
+  }
+
+  /* .customCodeInput 규칙은 .selectWrapper > * 로 대체되어 제거 가능 */
+  /* .customCodeInput { width: 100%; } */
+
   .arrowWrapper {
     position: static; 
     margin: 20px 0;
