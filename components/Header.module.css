@@ -8,12 +8,7 @@
 .wrapper {
   max-width: var(--layout-max-width, 1728px);
   margin: 0 auto;
-  
-  /* 1. (!! 수정 !!) 
-     상하/좌우 패딩을 40px에서 20px로 줄입니다.
-  */
   padding: 20px; 
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,6 +19,16 @@
   width: auto;
 }
 
+/* (!! 신규 !!) 
+   로그인/로그아웃 버튼 영역을 묶는 컨테이너
+*/
+.authContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 버튼 사이 간격 */
+}
+
+/* "나의 URL" / "우리아이 로그인" 버튼 */
 .myUrlButton {
   background-color: #FFFFFF;
   border: 1px solid #E0E0E0;
@@ -33,24 +38,55 @@
   font-size: 16px;
   color: var(--color-text-primary);
   transition: background-color 0.2s;
+  cursor: pointer; /* <button> 태그 호환용 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
 
 .myUrlButton:hover {
   background-color: #F9F9F9;
 }
 
+/* (!! 신규 !!) 
+   로그아웃 버튼 스타일
+*/
+.logoutButton {
+  background-color: transparent;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text-secondary); /* 회색 텍스트 */
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: #f0f0f0; /* 살짝 회색 배경 */
+  color: var(--color-text-primary); /* 진한 텍스트 */
+}
+
 
 /* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
   .wrapper {
-    /* 2. (!! 수정 !!) 모바일 패딩도 20px에서 16px로 줄입니다. */
     padding: 16px; 
   }
   .logo {
     height: 32px; 
   }
+  
+  .authContainer {
+    gap: 8px;
+  }
+  
   .myUrlButton {
     padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .logoutButton {
+    padding: 8px 12px;
     font-size: 14px;
   }
 }

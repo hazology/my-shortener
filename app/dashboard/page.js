@@ -102,9 +102,15 @@ export default function DashboardPage() {
   }
 
   return (
+    /* (!! 수정 !!) 
+      - background: "#f5f6fa" 제거
+      - fontFamily: "Arial, sans-serif" 제거
+      - (globals.css의 그래픽 배경과 폰트가 적용됩니다)
+    */
     <div style={{
-      display: "flex", justifyContent: "center", alignItems: "center",
-      minHeight: "100vh", background: "#f5f6fa", fontFamily: "Arial, sans-serif"
+      display: "flex", justifyContent: "center", alignItems: "flex-start",
+      minHeight: "calc(100vh - 160px)", /* (헤더/푸터 제외한 높이) */
+      padding: "20px"
     }}>
       <div style={{
         background: "#fff", padding: "2rem", borderRadius: 12,
@@ -121,7 +127,9 @@ export default function DashboardPage() {
               textDecoration: "none",
               fontWeight: "bold",
               fontSize: "0.9rem",
-              transition: "background 0.2s ease"
+              transition: "background 0.2s ease",
+              display: "inline-block", /* (margin 적용 위해) */
+              marginBottom: "1rem"
             }}
             onMouseOver={(e) => (e.target.style.background = "#2d3436")}
             onMouseOut={(e) => (e.target.style.background = "#636e72")}

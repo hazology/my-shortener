@@ -1,5 +1,5 @@
 // 파일 경로: app/privacy/page.js
-// (새로 만들기)
+// (이 코드로 덮어쓰세요)
 
 import Link from "next/link";
 
@@ -9,9 +9,11 @@ export default function PrivacyPage() {
       maxWidth: "800px",
       margin: "40px auto",
       padding: "20px",
-      fontFamily: "Arial, sans-serif",
       lineHeight: 1.6,
-      background: "#fff",
+      
+      /* (!! 수정 !!) background: "#fff" -> rgba(255, 255, 255, 0.5) */
+      background: "rgba(255, 255, 255, 0.5)",
+      
       borderRadius: "8px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
     },
@@ -45,7 +47,7 @@ export default function PrivacyPage() {
   };
 
   return (
-    <div style={{ background: "#f5f6fa", padding: "20px", minHeight: "100vh" }}>
+    <div style={{ padding: "20px", minHeight: "calc(100vh - 160px)" }}>
       <div style={styles.container}>
         <h1 style={styles.h1}>외솔.한국 개인정보처리방침</h1>
         <p><strong>최종 업데이트: 2025년 11월 05일</strong></p>
